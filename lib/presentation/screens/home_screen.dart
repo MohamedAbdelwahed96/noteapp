@@ -10,13 +10,13 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(18, 3, 17, 1),
+      backgroundColor: const Color.fromRGBO(18, 3, 17, 1),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
             children: [
-              SizedBox(height: 137),
+              const SizedBox(height: 137),
               Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10, bottom: 35),
                 child: Row(
@@ -26,30 +26,30 @@ class HomeScreen extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => AddNoteScreen()));
+                                builder: (context) => const AddNoteScreen()));
                       },
-                      child: ButtonWidget(name: "Add Note")
+                      child: const ButtonWidget(name: "Add Note")
                     ),
-                    Spacer(),
+                    const Spacer(),
                     InkWell(
                       onTap: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => LoginScreen()));
+                            MaterialPageRoute(builder: (context) => const LoginScreen()));
                       },
-                      child: ButtonWidget(name: "Log Out"),
+                      child: const ButtonWidget(name: "Log Out"),
                     )
                   ],
                 ),
               ),
-              NotesWidget(title: "Meeting", content: "Excepteur sint occaecat cupidatat non proiden.", time: "9.00 am"),
-              SizedBox(height: 12),
-              NotesWidget(title: "Buying Fruits", content: "Apple,Orange,Banana,Guava.", time: "11.00 am"),
-              SizedBox(height: 12),
-              NotesWidget(title: "Address", content: "4140 Parker Rd. Allentown, New Mexico 31134", time: "11.30 am"),
-              SizedBox(height: 12),
-              NotesWidget(title: "Packing", content: "Dress,Shoe,Watch,Toothbresh,Paste.", time: "1.00 pm"),
-              SizedBox(height: 12),
-              NotesWidget(title: "Health checkup", content: "Duis aute irure dolor in reprehenderit in voluptate.", time: "4.00 pm")
+              const NotesWidget(title: "Meeting", content: "Excepteur sint occaecat cupidatat non proiden.", time: "9.00 am"),
+              const SizedBox(height: 12),
+              const NotesWidget(title: "Buying Fruits", content: "Apple,Orange,Banana,Guava.", time: "11.00 am"),
+              const SizedBox(height: 12),
+              const NotesWidget(title: "Address", content: "4140 Parker Rd. Allentown, New Mexico 31134", time: "11.30 am"),
+              const SizedBox(height: 12),
+              const NotesWidget(title: "Packing", content: "Dress,Shoe,Watch,Toothbresh,Paste.", time: "1.00 pm"),
+              const SizedBox(height: 12),
+              const NotesWidget(title: "Health checkup", content: "Duis aute irure dolor in reprehenderit in voluptate.", time: "4.00 pm")
             ],
           ),
         ),

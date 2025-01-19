@@ -11,7 +11,7 @@ class NotesWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          color: Color.fromRGBO(242, 214, 241, 0.14)),
+          color: const Color.fromRGBO(242, 214, 241, 0.14)),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
@@ -19,21 +19,21 @@ class NotesWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(title,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.w500,
                     color: Colors.white)),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Row(
               children: [
                 Text(content,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.w400,
                         color: Color.fromRGBO(217, 217, 217, 1))),
-                Spacer(),
+                const Spacer(),
                 Text(time,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.w400,
                         color: Color.fromRGBO(217, 217, 217, 1)))
