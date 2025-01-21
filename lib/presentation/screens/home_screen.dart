@@ -1,56 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noteapp/Widgets/button_widget.dart';
+import 'package:noteapp/logic/get_notes_bloc/cubit.dart';
+import 'package:noteapp/logic/get_notes_bloc/state.dart';
 import 'package:noteapp/presentation/screens/add_note_screen.dart';
 import 'package:noteapp/presentation/screens/login_screen.dart';
-import 'package:noteapp/Widgets/notes.dart';
+import 'package:noteapp/widgets/note_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromRGBO(18, 3, 17, 1),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Column(
-            children: [
-              const SizedBox(height: 137),
-              Padding(
-                padding: const EdgeInsets.only(left: 10, right: 10, bottom: 35),
-                child: Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const AddNoteScreen()));
-                      },
-                      child: const ButtonWidget(name: "Add Note")
-                    ),
-                    const Spacer(),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => const LoginScreen()));
-                      },
-                      child: const ButtonWidget(name: "Log Out"),
-                    )
-                  ],
+    return BlocProvider(
+      create: (context)=>GetNoteCubit()..getNote(),
+      child: Scaffold(
+        backgroundColor: Color.fromRGBO(18, 3, 17, 1),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: Column(
+              children: [
+                SizedBox(height: 137),
+                Padding(
+                  padding: EdgeInsets.only(left: 10, right: 10, bottom: 35),
+                  child: Row(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => AddNoteScreen()));
+                        },
+                        child: ButtonWidget(name: "Add Note")
+                      ),
+                      Spacer(),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+                        },
+                        child: ButtonWidget(name: "Log Out"),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              const NotesWidget(title: "Meeting", content: "Excepteur sint occaecat cupidatat non proiden.", time: "9.00 am"),
-              const SizedBox(height: 12),
-              const NotesWidget(title: "Buying Fruits", content: "Apple,Orange,Banana,Guava.", time: "11.00 am"),
-              const SizedBox(height: 12),
-              const NotesWidget(title: "Address", content: "4140 Parker Rd. Allentown, New Mexico 31134", time: "11.30 am"),
-              const SizedBox(height: 12),
-              const NotesWidget(title: "Packing", content: "Dress,Shoe,Watch,Toothbresh,Paste.", time: "1.00 pm"),
-              const SizedBox(height: 12),
-              const NotesWidget(title: "Health checkup", content: "Duis aute irure dolor in reprehenderit in voluptate.", time: "4.00 pm")
-            ],
+                BlocBuilder<GetNoteCubit,GetNoteStates>(
+                  builder: (context, state){
+                    if(state is GetNoteLoadingState)
+                      return CircularProgressIndicator();
+                    else if(state is GetNoteSuccessState){
+                      final NoteRes = state.note;
+                      return ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        itemCount: NoteRes.length,
+                        itemBuilder: (context,index){
+                          final x = NoteRes[index];
+                          return NoteWidget(model: x);
+                        },
+                      );
+                    }
+                    else if(state is GetNoteErrorState)
+                      return Text(state.em);
+                    else
+                      return SizedBox();
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

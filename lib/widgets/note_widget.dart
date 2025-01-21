@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:noteapp/data/note_model.dart';
 
-class NotesWidget extends StatelessWidget {
-  final title, content, time;
-  const NotesWidget({super.key, this.title,this.content,this.time});
+class NoteWidget extends StatelessWidget {
+  final NoteModel model;
+  NoteWidget({super.key, required this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -11,29 +12,30 @@ class NotesWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          color: const Color.fromRGBO(242, 214, 241, 0.14)),
+          color: Color.fromRGBO(242, 214, 241, 0.14)),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title,
-                style: const TextStyle(
+            Text(model.headline,
+                style: TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.w500,
                     color: Colors.white)),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Row(
               children: [
-                Text(content,
-                    style: const TextStyle(
+                Text(model.description,
+                    style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.w400,
                         color: Color.fromRGBO(217, 217, 217, 1))),
-                const Spacer(),
-                Text(time,
-                    style: const TextStyle(
+                Spacer(),
+                Text("${model.time.hour.toString()}:${model.time.minute.toString()}"
+                    "${model.time.hour>=12?"PM":"AM"}",
+                    style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.w400,
                         color: Color.fromRGBO(217, 217, 217, 1)))

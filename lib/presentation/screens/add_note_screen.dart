@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:noteapp/widgets/text_field_widget.dart';
 import 'package:noteapp/data/note_model.dart';
 import 'package:noteapp/logic/create_note_bloc/cubit.dart';
 import 'package:noteapp/logic/create_note_bloc/state.dart';
@@ -55,22 +56,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                             fontSize: 14,
                             color: Colors.white)),
                     const SizedBox(height: 10),
-                    TextFormField(
-                      controller: headlineController,
-                      style: const TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                          filled: true,
-                          fillColor: const Color.fromRGBO(242, 214, 241, 0.08),
-                          hintText: "Enter Note Address",
-                          hintStyle: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              color: Color.fromRGBO(255, 255, 255, 0.7)),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          enabledBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.transparent))),
-                    ),
+                    TextFieldWidget(controller: headlineController, hinttext: "Enter Note Address"),
                     const SizedBox(height: 20),
                     const Text("Description",
                         style: TextStyle(
@@ -78,19 +64,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                             fontSize: 14,
                             color: Colors.white)),
                     const SizedBox(height: 10),
-                    TextFormField(
-                      controller: descriptionController,
-                      style: const TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                        filled: true, fillColor: const Color.fromRGBO(242, 214, 241, 0.08),
-                        hintText: "Enter Your Description",
-                        hintStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Color.fromRGBO(255, 255, 255, 0.7)),
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                        enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent)),
-                      ),
-                      minLines: 6,
-                      maxLines: 6,
-                    ),
+                    TextFieldWidget(controller: descriptionController, hinttext: "Enter Your Description", minL: 6, maxL: 6),
                     const SizedBox(height: 80),
                     InkWell(
                       onTap: () {

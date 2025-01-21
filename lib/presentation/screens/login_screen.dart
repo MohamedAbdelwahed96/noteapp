@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:noteapp/widgets/text_field_widget.dart';
 import 'package:noteapp/logic/sign_in_bloc/cubit.dart';
 import 'package:noteapp/logic/sign_in_bloc/state.dart';
 import 'package:noteapp/presentation/screens/home_screen.dart';
@@ -52,19 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontSize: 14,
                             color: Colors.white)),
                     const SizedBox(height: 10),
-                    TextFormField(
-                      controller: emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      style: const TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                          filled: true,
-                          fillColor: const Color.fromRGBO(242, 214, 241, 0.08),
-                          hintText: "example@gmail.com",
-                          hintStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Color.fromRGBO(255, 255, 255, 0.7)),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                          enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent))
-                      ),
-                    ),
+                    TextFieldWidget(controller: emailController, hinttext: "example@gmail.com"),
                     const SizedBox(height: 20),
                     const Text("Password",
                         style: TextStyle(
@@ -72,18 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontSize: 14,
                             color: Colors.white)),
                     const SizedBox(height: 10),
-                    TextFormField(
-                      controller: passController,
-                      style: const TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                          filled: true,
-                          fillColor: const Color.fromRGBO(242, 214, 241, 0.08),
-                          hintText: "Enter Your Password",
-                          hintStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Color.fromRGBO(255, 255, 255, 0.7)),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                          enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent))
-                      ),
-                    ),
+                    TextFieldWidget(controller: passController, hinttext: "Enter Your Password"),
                     const SizedBox(height: 80),
                     InkWell(
                       onTap: (){
