@@ -50,13 +50,21 @@ class HomeScreen extends StatelessWidget {
                       return CircularProgressIndicator();
                     else if(state is GetNoteSuccessState){
                       final NoteRes = state.note;
-                      return ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        itemCount: NoteRes.length,
-                        itemBuilder: (context,index){
-                          final x = NoteRes[index];
-                          return NoteWidget(model: x);
-                        },
+                      return SizedBox(
+                        height: MediaQuery.of(context).size.height*0.66,
+                        child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          itemCount: NoteRes.length,
+                          itemBuilder: (context,index){
+                            final x = NoteRes[index];
+                            return Column(
+                              children: [
+                                NoteWidget(model: x),
+                                SizedBox(height: 10)
+                              ],
+                            );
+                          },
+                        ),
                       );
                     }
                     else if(state is GetNoteErrorState)
