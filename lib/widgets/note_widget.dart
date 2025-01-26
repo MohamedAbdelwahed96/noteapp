@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:noteapp/data/note_model.dart';
+import 'package:photo_view/photo_view.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class NoteWidget extends StatelessWidget {
   final NoteModel model;
@@ -19,11 +21,23 @@ class NoteWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(model.headline,
-                style: TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white)),
+            Row(
+              children: [
+                Text(model.headline,
+                    style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white)),
+                Spacer(),
+                IconButton(onPressed: (){
+                  final imageURL = Supabase.instance.client.storage.from("images").getPublicUrl("uploads/${model.image}");
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (_) => PhotoView(imageProvider: NetworkImage(imageURL)
+                  )));
+
+                }, icon: Icon(Icons.picture_in_picture_rounded, color: Color.fromRGBO(217, 217, 217, 1)))
+              ],
+            ),
             SizedBox(height: 8),
             Row(
               children: [

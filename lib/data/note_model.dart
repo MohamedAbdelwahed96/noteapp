@@ -2,12 +2,14 @@ class NoteModel {
   String headline;
   String description;
   DateTime time;
+  String image;
 
   // Constructor
   NoteModel({
     required this.headline,
     required this.description,
     required this.time,
+    required this.image
   });
 
   // Convert a Map to a NoteModel object
@@ -16,6 +18,7 @@ class NoteModel {
       headline: map['headline'] ?? '',
       description: map['description'] ?? '',
       time: DateTime.parse(map['time']),
+      image: map['image'] ?? '',
     );
   }
 
@@ -25,6 +28,7 @@ class NoteModel {
       'headline': headline,
       'description': description,
       'time': time.toIso8601String(),  // You can customize the format here if needed
+      'image': image.toString()
     };
   }
 }
