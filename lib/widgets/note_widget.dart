@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:noteapp/data/note_model.dart';
+import 'package:noteapp/logic/image_bloc/note_image_provider.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class NoteWidget extends StatelessWidget {
@@ -30,13 +32,16 @@ class NoteWidget extends StatelessWidget {
                         color: Colors.white)),
                 Spacer(),
                 model.image!=""?
-                IconButton(onPressed: (){
-                  final imageURL = Supabase.instance.client.storage.from("images").getPublicUrl("uploads/${model.image}");
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (_) => PhotoView(imageProvider: NetworkImage(imageURL)
-                  )));
-
-                }, icon: Icon(Icons.picture_in_picture_rounded, color: Color.fromRGBO(217, 217, 217, 1))):SizedBox()
+                Consumer<noteImageProvider>(
+                  builder: (context,provider,_){
+                    return IconButton(onPressed: (){
+                      final url = Supabase.instance.client.storage.from("images").getPublicUrl("uploads/${model.image}");
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (_) => PhotoView(imageProvider: NetworkImage(url))));
+                    }, icon: Icon(Icons.picture_in_picture_rounded, color: Color.fromRGBO(217, 217, 217, 1)));
+                  }
+                )
+                    :SizedBox()
               ],
             ),
             SizedBox(height: 8),
