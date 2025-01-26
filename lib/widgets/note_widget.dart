@@ -29,13 +29,14 @@ class NoteWidget extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                         color: Colors.white)),
                 Spacer(),
+                model.image!=""?
                 IconButton(onPressed: (){
                   final imageURL = Supabase.instance.client.storage.from("images").getPublicUrl("uploads/${model.image}");
                   Navigator.push(context, MaterialPageRoute(
                     builder: (_) => PhotoView(imageProvider: NetworkImage(imageURL)
                   )));
 
-                }, icon: Icon(Icons.picture_in_picture_rounded, color: Color.fromRGBO(217, 217, 217, 1)))
+                }, icon: Icon(Icons.picture_in_picture_rounded, color: Color.fromRGBO(217, 217, 217, 1))):SizedBox()
               ],
             ),
             SizedBox(height: 8),
