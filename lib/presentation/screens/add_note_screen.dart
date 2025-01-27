@@ -20,6 +20,8 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
   TextEditingController descriptionController = TextEditingController();
   TextEditingController timeController = TextEditingController();
 
+  bool isEmpty=false;
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -53,11 +55,25 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                                 color: Colors.white),
                           ),
                           const SizedBox(height: 40),
-                          const Text("Head line",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14,
-                                  color: Colors.white)),
+                          Row(
+                            children: [
+                              const Text("Head line",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 14,
+                                      color: Colors.white)),
+                              const Spacer(),
+                              Visibility (
+                                visible: isEmpty,
+                                child: const Text("Head line can't be Empty",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14,
+                                    color: Colors.redAccent,
+                                )),
+                              )
+                            ],
+                          ),
                           const SizedBox(height: 10),
                           TextFieldWidget(controller: headlineController, hinttext: "Enter Note Address"),
                           const SizedBox(height: 20),
@@ -127,12 +143,14 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                           const SizedBox(height: 10),
                           InkWell(
                             onTap: () {
-                              provider.uploadImage(context);
+                              headlineController.text.isEmpty?setState(() => isEmpty = true):{
+                                setState(() => isEmpty = false),
+                              provider.uploadImage(context),
                               context.read<CreateNoteCubit>().createNote(NoteModel(
                                   headline: headlineController.text,
                                   description: descriptionController.text,
                                   image: provider.filename!,
-                                  time: DateTime.now()));
+                                  time: DateTime.now()))};
                             },
                             child: Container(
                               height: 48,
