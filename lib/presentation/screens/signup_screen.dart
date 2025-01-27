@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:noteapp/widgets/text_field_widget.dart';
+import 'package:noteapp/presentation/widgets/text_field_widget.dart';
 import 'package:noteapp/logic/sign_up_bloc/cubit.dart';
 import 'package:noteapp/logic/sign_up_bloc/state.dart';
 import 'package:noteapp/presentation/screens/home_screen.dart';

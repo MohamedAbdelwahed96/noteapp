@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noteapp/logic/image_bloc/note_image_provider.dart';
-import 'package:noteapp/widgets/text_field_widget.dart';
+import 'package:noteapp/presentation/widgets/text_field_widget.dart';
 import 'package:noteapp/data/note_model.dart';
 import 'package:noteapp/logic/create_note_bloc/cubit.dart';
 import 'package:noteapp/logic/create_note_bloc/state.dart';
@@ -107,7 +107,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                                               Text("Camera")
                                             ],
                                           ),
-                                          SizedBox(width: 32),
+                                          SizedBox(width: 24),
                                           Column(
                                             children: [
                                               IconButton(
