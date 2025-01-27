@@ -10,8 +10,17 @@ class noteImageProvider extends ChangeNotifier{
   final ImagePicker picker = ImagePicker();
   String? filename;
 
-  Future selectImage()async{
+  Future selectImageFromGallery()async{
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    if(image != null){
+      ImageFile = File(image.path);
+      notifyListeners();
+    }
+    notifyListeners();
+  }
+
+  Future selectImageFromCamera()async{
+    final XFile? image = await picker.pickImage(source: ImageSource.camera);
     if(image != null){
       ImageFile = File(image.path);
       notifyListeners();
@@ -53,7 +62,7 @@ class noteImageProvider extends ChangeNotifier{
   }
 
   Future <String>getSingleImage(String image)async{
-    String imageURL = await Supabase.instance.client.storage.from("images").getPublicUrl("uploads/$image");
+    final String imageURL = await Supabase.instance.client.storage.from("images").getPublicUrl("uploads/$image");
     return imageURL;
   }
 }

@@ -31,20 +31,21 @@ class NoteWidget extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                         color: Colors.white)),
                 Spacer(),
-                model.image!=""?
+                model.image==""?SizedBox():
                 Consumer<noteImageProvider>(
                   builder: (context,provider,_){
                     return IconButton(onPressed: (){
                       final url = Supabase.instance.client.storage.from("images").getPublicUrl("uploads/${model.image}");
                       Navigator.push(context, MaterialPageRoute(builder: (_) => Scaffold(
-                            appBar: AppBar(
-                              backgroundColor: Colors.black,
-                                iconTheme: IconThemeData(color: Colors.white)),
-                              body: PhotoView(imageProvider: NetworkImage(url)))));
-                    }, icon: Icon(Icons.picture_in_picture_rounded, color: Color.fromRGBO(217, 217, 217, 1)));
+                        backgroundColor: Colors.transparent,
+                        appBar: AppBar(
+                            backgroundColor: Colors.black,
+                            iconTheme: IconThemeData(color: Colors.white)),
+                        body: PhotoView(imageProvider: NetworkImage(url)),
+                      )));
+                    }, icon: Icon(Icons.photo, color: Color.fromRGBO(217, 217, 217, 1)));
                   }
                 )
-                    :SizedBox()
               ],
             ),
             SizedBox(height: 8),

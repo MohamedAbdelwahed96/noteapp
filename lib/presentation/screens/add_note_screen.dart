@@ -27,13 +27,11 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
       child: BlocConsumer<CreateNoteCubit,CreateNoteStates>(
         listener: (context,state){
           if(state is CreateNoteSuccessState){
-            ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text("Note Created Successfully")));
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Note Created Successfully")));
             Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
           }
           else if(state is CreateNoteErrorState)
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.em)));
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.em)));
         },
         builder: (context,state){
           return Consumer<noteImageProvider>(
@@ -73,7 +71,44 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                           const SizedBox(height: 30),
                           InkWell(
                             onTap: () {
-                              provider.selectImage();
+                              showModalBottomSheet(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return SizedBox(
+                                    height: MediaQuery.of(context).size.height*0.15,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(16),
+                                      child: Row(
+                                        children: [
+                                          Column(
+                                            children: [
+                                              IconButton(
+                                                onPressed: () {
+                                                  provider.selectImageFromCamera();
+                                                  Navigator.pop(context);
+                                                },
+                                                icon: Icon(Icons.camera_alt, size: MediaQuery.of(context).size.height*0.06)),
+                                              Text("Camera")
+                                            ],
+                                          ),
+                                          SizedBox(width: 32),
+                                          Column(
+                                            children: [
+                                              IconButton(
+                                                onPressed: () {
+                                                  provider.selectImageFromGallery();
+                                                  Navigator.pop(context);
+                                                },
+                                                icon: Icon(Icons.photo_library, size: MediaQuery.of(context).size.height*0.06)),
+                                              Text("Gallery")
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
                             },
                             child: Container(
                               height: 48,
