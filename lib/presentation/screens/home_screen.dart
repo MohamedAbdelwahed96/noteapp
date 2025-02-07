@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:noteapp/Widgets/button_widget.dart';
 import 'package:noteapp/logic/get_notes_bloc/cubit.dart';
 import 'package:noteapp/logic/get_notes_bloc/state.dart';
 import 'package:noteapp/presentation/screens/add_note_screen.dart';
 import 'package:noteapp/presentation/screens/login_screen.dart';
+import 'package:noteapp/presentation/widgets/button_widget.dart';
 import 'package:noteapp/presentation/widgets/note_widget.dart';
 
 class HomeScreen extends StatelessWidget {
